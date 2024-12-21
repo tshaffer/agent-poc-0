@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import { ChatOpenAI } from "@langchain/openai";
+import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { TavilySearchResults } from "@langchain/community/tools/tavily_search";
 import "cheerio"; // This is required in notebooks to use the `CheerioWebBaseLoader`
 import { CheerioWebBaseLoader } from "@langchain/community/document_loaders/web/cheerio";
@@ -14,6 +15,15 @@ dotenv.config();
 console.log('environment variables:');
 console.log(process.env.OPENAI_API_KEY);
 console.log(process.env.TAVILY_API_KEY);
+
+const prompt = ChatPromptTemplate.fromMessages([
+  ["system", "You are a helpful assistant"],
+  ["placeholder", "{chat_history}"],
+  ["human", "{input}"],
+  ["placeholder", "{agent_scratchpad}"],
+]);
+
+console.log(prompt.promptMessages);
 
 const search = new TavilySearchResults({
   maxResults: 2,
@@ -81,5 +91,26 @@ console.log(`Content: ${responseWithToolCalls.content}`);
 console.log(
   `Tool calls: ${JSON.stringify(responseWithToolCalls.tool_calls, null, 2)}`
 );
+
+
+
+
+
+// const prompt = ChatPromptTemplate.fromMessages([
+//   ["system", "You are a helpful assistant"],
+//   ["placeholder", "{chat_history}"],
+//   ["human", "{input}"],
+//   ["placeholder", "{agent_scratchpad}"],
+// ]);
+
+// console.log(prompt.promptMessages);
+
+
+
+
+
+
+
+
 
 console.log('exit');
