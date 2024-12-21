@@ -74,21 +74,17 @@ const modelWithTools = model.bindTools(tools);
 // console.log(`Content: ${responseWithTools.content}`);
 // console.log(`Tool calls: ${responseWithTools.tool_calls}`);
 
-const responseWithToolCalls = await modelWithTools.invoke([
-  {
-    role: "user",
-    content: "What's the weather in SF?",
-  },
-]);
+// const responseWithToolCalls = await modelWithTools.invoke([
+//   {
+//     role: "user",
+//     content: "What's the weather in SF?",
+//   },
+// ]);
 
-console.log(`Content: ${responseWithToolCalls.content}`);
-console.log(
-  `Tool calls: ${JSON.stringify(responseWithToolCalls.tool_calls, null, 2)}`
-);
-
-
-
-
+// console.log(`Content: ${responseWithToolCalls.content}`);
+// console.log(
+//   `Tool calls: ${JSON.stringify(responseWithToolCalls.tool_calls, null, 2)}`
+// );
 
 const prompt = ChatPromptTemplate.fromMessages([
   ["system", "You are a helpful assistant"],
@@ -106,7 +102,12 @@ const agentExecutor = new AgentExecutor({
   tools,
 });
 
-const agentResults: ChainValues = await agentExecutor.invoke({ input: "hi!" });
+// const agentResults: ChainValues = await agentExecutor.invoke({ input: "hi!" });
+
+const agentResults: ChainValues = await agentExecutor.invoke({ input: "how can langsmith help with testing?" });
+
+// const agentResults: ChainValues = await agentExecutor.invoke({ input: "whats the weather in sf?" });
+
 
 console.log(agentResults);
 
