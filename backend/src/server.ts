@@ -60,13 +60,26 @@ const model = new ChatOpenAI({ model: "gpt-4" });
 
 const modelWithTools = model.bindTools(tools);
 
-const responseWithTools = await modelWithTools.invoke([
+// const responseWithTools = await modelWithTools.invoke([
+//   {
+//     role: "user",
+//     content: "Hi!",
+//   },
+// ]);
+
+// console.log(`Content: ${responseWithTools.content}`);
+// console.log(`Tool calls: ${responseWithTools.tool_calls}`);
+
+const responseWithToolCalls = await modelWithTools.invoke([
   {
     role: "user",
-    content: "Hi!",
+    content: "What's the weather in SF?",
   },
 ]);
 
-console.log(`Content: ${responseWithTools.content}`);
-console.log(`Tool calls: ${responseWithTools.tool_calls}`);
+console.log(`Content: ${responseWithToolCalls.content}`);
+console.log(
+  `Tool calls: ${JSON.stringify(responseWithToolCalls.tool_calls, null, 2)}`
+);
+
 console.log('exit');
