@@ -62,7 +62,7 @@ const tools = [search, retrieverTool];
 
 const model = new ChatOpenAI({ model: "gpt-4" });
 
-const modelWithTools = model.bindTools(tools);
+// const modelWithTools = model.bindTools(tools);
 
 // const responseWithTools = await modelWithTools.invoke([
 //   {
@@ -104,9 +104,9 @@ const agentExecutor = new AgentExecutor({
 
 // const agentResults: ChainValues = await agentExecutor.invoke({ input: "hi!" });
 
-const agentResults: ChainValues = await agentExecutor.invoke({ input: "how can langsmith help with testing?" });
+// const agentResults: ChainValues = await agentExecutor.invoke({ input: "how can langsmith help with testing?" });
 
-// const agentResults: ChainValues = await agentExecutor.invoke({ input: "whats the weather in sf?" });
+const agentResults: ChainValues = await agentExecutor.invoke({ input: "what can you tell me about the restaurant Capelo's Barbecue in Redwood City, California?" });
 
 
 console.log(agentResults);
