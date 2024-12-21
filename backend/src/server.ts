@@ -9,21 +9,15 @@ import { OpenAIEmbeddings } from "@langchain/openai";
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { z } from "zod";
 import { tool } from "@langchain/core/tools";
+import { createToolCallingAgent } from "langchain/agents";
+import { AgentExecutor } from "langchain/agents";
+import { ChainValues } from '@langchain/core/utils/types';
 
 dotenv.config();
 
 console.log('environment variables:');
 console.log(process.env.OPENAI_API_KEY);
 console.log(process.env.TAVILY_API_KEY);
-
-const prompt = ChatPromptTemplate.fromMessages([
-  ["system", "You are a helpful assistant"],
-  ["placeholder", "{chat_history}"],
-  ["human", "{input}"],
-  ["placeholder", "{agent_scratchpad}"],
-]);
-
-console.log(prompt.promptMessages);
 
 const search = new TavilySearchResults({
   maxResults: 2,
@@ -96,19 +90,25 @@ console.log(
 
 
 
-// const prompt = ChatPromptTemplate.fromMessages([
-//   ["system", "You are a helpful assistant"],
-//   ["placeholder", "{chat_history}"],
-//   ["human", "{input}"],
-//   ["placeholder", "{agent_scratchpad}"],
-// ]);
+const prompt = ChatPromptTemplate.fromMessages([
+  ["system", "You are a helpful assistant"],
+  ["placeholder", "{chat_history}"],
+  ["human", "{input}"],
+  ["placeholder", "{agent_scratchpad}"],
+]);
 
-// console.log(prompt.promptMessages);
+console.log(prompt.promptMessages);
 
+const agent = await createToolCallingAgent({ llm: model, tools, prompt });
 
+const agentExecutor = new AgentExecutor({
+  agent,
+  tools,
+});
 
+const agentResults: ChainValues = await agentExecutor.invoke({ input: "hi!" });
 
-
+console.log(agentResults);
 
 
 
