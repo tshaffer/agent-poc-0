@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",               // Use modern JavaScript features
+    "module": "ESNext",               // Enable ESNext module system
+    "moduleResolution": "node",       // Required for resolveJsonModule
+    "strict": true,                   // Enable strict type-checking
+    "esModuleInterop": true,          // Interoperability between CommonJS and ES modules
+    "resolveJsonModule": true,        // Allow importing JSON files
+    "skipLibCheck": true,             // Skip type checking of declaration files
+    "outDir": "dist",                 // Output directory for compiled files
+    "rootDir": "src",                 // Root source directory
+    "sourceMap": true,                // Generate source maps
+    "typeRoots": ["node_modules/@types"] // Include type definitions
+  },
+  "include": ["src/**/*"],            // Include all files in src
+  "exclude": ["node_modules"]         // Exclude node_modules
+}
