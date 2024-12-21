@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", // Output ESNext JavaScript
+    "module": "CommonJS", // Use CommonJS for compatibility with Node.js
+    "strict": true, // Enable all strict type-checking options
+    "esModuleInterop": true, // Allow import/export compatibility
+    "resolveJsonModule": true, // Support importing JSON files
+    "skipLibCheck": true,                  // Skip type checking of declaration files
+    "outDir": "dist", // Output directory for compiled files
+    "rootDir": "src", // Source directory
+    "sourceMap": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ], // Include type definitions from node_modules
+  },
+  "include": [
+    "src/**/*"
+  ], // Include all files in the src directory
+  "exclude": [
+    "node_modules"
+  ] // Exclude node_modules
+}
